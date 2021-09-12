@@ -23,7 +23,7 @@ data class User(
     val username: String,
     @SerializedName("website")
     val website: String
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Address(
@@ -37,7 +37,7 @@ data class Address(
     val suite: String,
     @SerializedName("zipcode")
     val zipcode: String
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Geo(
@@ -45,7 +45,7 @@ data class Geo(
     val lat: String,
     @SerializedName("lng")
     val lng: String
-):Parcelable
+) : Parcelable
 
 @Parcelize
 data class Company(
@@ -55,4 +55,15 @@ data class Company(
     val catchPhrase: String,
     @SerializedName("name")
     val name: String
-):Parcelable
+) : Parcelable
+
+data class Post(
+    @SerializedName("body")
+    val body: String,
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("title")
+    val title: String,
+    @SerializedName("userId")
+    val userId: Int
+)

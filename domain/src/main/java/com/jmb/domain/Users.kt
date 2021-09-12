@@ -31,3 +31,10 @@ data class Company(
     val catchPhrase: String,
     val name: String
 )
+
+data class Post(
+    val body: String,
+    val id: Int,
+    val title: String,
+    val userId: Int
+)

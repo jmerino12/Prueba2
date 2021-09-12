@@ -2,6 +2,7 @@ package com.jmb.data.repository
 
 import com.jmb.data.source.LocalDataSource
 import com.jmb.data.source.RemoteDataSource
+import com.jmb.domain.Post
 import com.jmb.domain.User
 
 class UsersRepository(
@@ -18,7 +19,8 @@ class UsersRepository(
 
     suspend fun findById(id: Int): User = localDataSource.findById(id)
 
-    suspend fun updateUser(user: User) = localDataSource.update(user)
+    suspend fun findByIdPost(idUser: String): List<Post> = remoteDataSource.getPostByUserId(idUser)
+
 
 
 }

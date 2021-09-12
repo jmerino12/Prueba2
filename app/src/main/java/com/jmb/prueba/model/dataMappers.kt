@@ -1,14 +1,16 @@
 package com.jmb.prueba.model
 
-import com.jmb.domain.User
 import com.jmb.domain.Address
-import com.jmb.domain.Geo
 import com.jmb.domain.Company
+import com.jmb.domain.Geo
+import com.jmb.domain.Post
+import com.jmb.domain.User
 import com.jmb.prueba.model.database.User as DomainUser
-import com.jmb.prueba.model.server.User as ServerUser
 import com.jmb.prueba.model.server.Address as ServerAddress
-import com.jmb.prueba.model.server.Geo as ServerGeo
 import com.jmb.prueba.model.server.Company as ServerCompany
+import com.jmb.prueba.model.server.Geo as ServerGeo
+import com.jmb.prueba.model.server.Post as ServerPost
+import com.jmb.prueba.model.server.User as ServerUser
 
 
 fun User.toRoomMovie(): DomainUser = DomainUser(
@@ -60,4 +62,8 @@ fun ServerCompany.toDomainCompany(): Company = Company(
     bs = bs,
     catchPhrase = catchPhrase,
     name = name
+)
+
+fun ServerPost.toDomainPost(): Post = Post(
+    body, id, title, userId
 )

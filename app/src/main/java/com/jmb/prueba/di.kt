@@ -12,11 +12,9 @@ import com.jmb.prueba.ui.main.MainActivity
 import com.jmb.prueba.ui.main.MainViewModel
 import com.jmb.prueba.ui.posts.PostActivity
 import com.jmb.prueba.ui.posts.PostViewModel
-import com.jmb.usecases.FindPostsByUserId
+import com.jmb.usecases.GetDataUserById
+import com.jmb.usecases.GetPostForUserId
 import com.jmb.usecases.GetUsers
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -42,7 +40,7 @@ private val appModule = module {
 }
 
 val dataModule = module {
-    factory { UsersRepository(get(),get()) }
+    factory { UsersRepository(get(), get()) }
 }
 
 private val scopesModule = module {
@@ -52,7 +50,9 @@ private val scopesModule = module {
     }
 
     scope(named<PostActivity>()) {
-        viewModel { (id: Int) -> PostViewModel(id, get()) }
-        scoped { FindPostsByUserId(get()) }
+        viewModel { (id: Int) -> PostViewModel(id, get(), get()) }
+        scoped { GetDataUserById(get()) }
+        scoped { GetPostForUserId(get()) }
+
     }
 }

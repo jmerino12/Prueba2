@@ -74,7 +74,7 @@ class UserAdapter(private val listener: (User) -> Unit) :
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 users = results!!.values as ArrayList<User>
-                notifyDataSetChanged()
+                notifyItemRangeChanged(0, users.size)
             }
 
         }

@@ -12,54 +12,52 @@ import com.jmb.prueba.model.server.Company as ServerCompany
 
 
 fun User.toRoomMovie(): DomainUser = DomainUser(
-    address,
-    company,
-    email,
-    id,
-    name,
-    phone,
-    username,
-    website
+    email = email,
+    id = id,
+    name = name,
+    phone = phone,
+    username = username,
+    website = website
 )
 
 fun DomainUser.toDomainUser(): User = User(
-    address,
-    company,
-    email,
-    id,
-    name,
-    phone,
-    username,
-    website
+    address = address,
+    company = company,
+    email = email,
+    id = id,
+    name = name,
+    phone = phone,
+    username = username,
+    website = website
 )
 
 fun ServerUser.toDomainMovie(): User =
     User(
-        address = address!!.toDomainAddress(),
-        company = company!!.toDomainCompany(),
-        email = email!!,
-        id = id!!,
-        name = name!!,
-        phone = phone!!,
-        username = username!!,
-        website = website!!
+        address = address?.toDomainAddress(),
+        company = company?.toDomainCompany(),
+        email = email,
+        id = id,
+        name = name,
+        phone = phone,
+        username = username,
+        website = website
     )
 
 fun ServerAddress.toDomainAddress(): Address = Address(
-    geo = geo!!.toDomainGeo(),
-    city = city!!,
-    street = street!!,
-    suite = suite!!,
-    zipcode = zipcode!!
+    geo = geo.toDomainGeo(),
+    city = city,
+    street = street,
+    suite = suite,
+    zipcode = zipcode
 )
 
 fun ServerGeo.toDomainGeo(): Geo = Geo(
-    lat = lat!!,
-    lng = lng!!
+    lat = lat,
+    lng = lng
 )
 
 fun ServerCompany.toDomainCompany(): Company = Company(
-    bs = bs!!,
-    catchPhrase = catchPhrase!!,
-    name = name!!
+    bs = bs,
+    catchPhrase = catchPhrase,
+    name = name
 )

@@ -1,11 +1,8 @@
 package com.jmb.prueba.model.database
 
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
-
+@Dao
 interface UserDao {
 
     @Query("SELECT * FROM User")

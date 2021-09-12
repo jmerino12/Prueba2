@@ -4,11 +4,15 @@ import android.app.Application
 import com.jmb.data.repository.UsersRepository
 import com.jmb.data.source.LocalDataSource
 import com.jmb.data.source.RemoteDataSource
+import com.jmb.prueba.model.database.RoomDataSource
+import com.jmb.prueba.model.database.UserDatabase
 import com.jmb.prueba.model.server.TheUserDbDataSource
 import com.jmb.prueba.model.server.UserDB
 import com.jmb.prueba.ui.main.MainActivity
 import com.jmb.prueba.ui.main.MainViewModel
 import com.jmb.prueba.ui.posts.PostActivity
+import com.jmb.prueba.ui.posts.PostViewModel
+import com.jmb.usecases.FindPostsByUserId
 import com.jmb.usecases.GetUsers
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -30,14 +34,15 @@ fun Application.initDI() {
 }
 
 private val appModule = module {
+    single { UserDatabase.build(get()) }
+    factory<LocalDataSource> { RoomDataSource(get()) }
     factory<RemoteDataSource> { TheUserDbDataSource(get()) }
-    single<CoroutineDispatcher> { Dispatchers.Main }
     single(named("baseUrl")) { "https://jsonplaceholder.typicode.com/" }
     single { UserDB(get(named("baseUrl"))) }
 }
 
 val dataModule = module {
-    factory { UsersRepository(get()) }
+    factory { UsersRepository(get(),get()) }
 }
 
 private val scopesModule = module {
@@ -46,9 +51,8 @@ private val scopesModule = module {
         scoped { GetUsers(get()) }
     }
 
-    /*scope(named<PostActivity>()) {
-        viewModel { (id: Int) -> DetailViewModel(id, get(), get(), get()) }
-        scoped { FindMovieById(get()) }
-        scoped { ToggleMovieFavorite(get()) }
-    }*/
+    scope(named<PostActivity>()) {
+        viewModel { (id: Int) -> PostViewModel(id, get()) }
+        scoped { FindPostsByUserId(get()) }
+    }
 }

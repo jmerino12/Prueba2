@@ -2,8 +2,8 @@ package com.jmb.domain
 
 
 data class User(
-    val address: Address,
-    val company: Company,
+    val address: Address? = null,
+    val company: Company? = null,
     val email: String,
     val id: Int,
     val name: String,

@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jmb.domain.User
@@ -39,14 +39,25 @@ class MainActivity : ScopeActivity() {
         binding.recyclerViewSearchResults.adapter = adapter
 
         viewModel.users.observe(this, Observer(::updateUi))
+
+        filterForName()
+    }
+
+    private fun filterForName() {
+        binding.editTextSearch.doAfterTextChanged {
+            adapter.filter.filter(it.toString())
+        }
     }
 
     private fun updateUi(model: UiModel<List<User>>) {
         binding.progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
 
         when (model) {
-            is UiModel.Content -> adapter.users = model.data
-            is UiModel.Error -> Log.e("Main",model.error.toString())
+            is UiModel.Content -> {
+                adapter.users = ArrayList(model.data)
+                adapter.listUsersCopy = ArrayList(model.data)
+            }
+            is UiModel.Error -> Log.e("Main", model.error.toString())
         }
     }
 

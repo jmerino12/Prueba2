@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.properties.Delegates
 
 inline fun <VH : RecyclerView.ViewHolder, T> RecyclerView.Adapter<VH>.basicDiffUtil(
-    initialValue: List<T>,
+    initialValue: ArrayList<T>,
     crossinline areItemsTheSame: (T, T) -> Boolean = { old, new -> old == new },
     crossinline areContentsTheSame: (T, T) -> Boolean = { old, new -> old == new }
 ) =

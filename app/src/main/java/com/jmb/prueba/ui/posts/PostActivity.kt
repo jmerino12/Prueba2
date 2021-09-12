@@ -54,7 +54,7 @@ class PostActivity : ScopeActivity() {
         binding.progress.visibility = if (model is UiModel.Loading) View.VISIBLE else View.GONE
         when (model) {
             is UiModel.Content -> {
-                adapter.posts = model.data
+                adapter.posts = ArrayList(model.data)
             }
             is UiModel.Error -> Log.e("PostError", model.error.toString())
         }

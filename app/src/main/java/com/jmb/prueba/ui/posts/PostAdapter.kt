@@ -11,8 +11,8 @@ import com.jmb.prueba.ui.common.basicDiffUtil
 class PostAdapter :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
-    var posts: List<Post> by basicDiffUtil(
-        emptyList(),
+    var posts: ArrayList<Post> by basicDiffUtil(
+        ArrayList(),
         areItemsTheSame = { old, new -> old.id == new.id }
     )
 

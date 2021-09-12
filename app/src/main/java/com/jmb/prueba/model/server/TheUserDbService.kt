@@ -5,7 +5,7 @@ import retrofit2.http.Query
 
 interface TheUserDbService {
     @GET("users")
-    suspend fun getListUsers(): List<User>
+    suspend fun getListUsers(): ArrayList<User>
 
     @GET("posts")
     suspend fun getPostByUserId(
